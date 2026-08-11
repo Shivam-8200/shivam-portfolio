@@ -12,9 +12,6 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:8787";
 
 export default function ContactWindow() {
   const [form, setForm] = useState({
@@ -35,8 +32,8 @@ export default function ContactWindow() {
 
     try {
       const res = await fetch(
-        `${API_URL}/api/contact`,
-        {
+  "/api/contact",
+  {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
