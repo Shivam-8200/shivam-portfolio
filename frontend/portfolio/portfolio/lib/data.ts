@@ -1,88 +1,291 @@
 // ─────────────────────────────────────────────────────────────
-// All portfolio content lives here. Edit this file to update
-// anything shown on the site — no need to touch components.
+// SHIVAM.DEV — Canonical Portfolio Data
+//
+// Keep professional facts centralized here.
+// UI components, Terminal, AI context, Projects, Finder,
+// Recruiter Mode and other experiences should read from this data.
+//
+// IMPORTANT:
+// - Do not add unverified experience or metrics here.
+// - Keep this file aligned with the latest resume.
 // ─────────────────────────────────────────────────────────────
 
 export const PROFILE = {
-  name: "Shivam",
-  fullTitle: "Full-Stack Developer (MERN) & AI Automation Builder",
-  tagline: "B.Tech CSE, KIIT University — Class of 2026",
-  location: "Open to relocation: Bengaluru, Hyderabad, Noida, Gurgaon",
-  email: "your.email@example.com", // TODO: replace with real email
+  name: "Shivam Prasad",
+
+  shortName: "Shivam",
+
+  fullTitle: "Full-Stack Developer • AI • Automation",
+
+  tagline: "Computer Science graduate building full-stack products, AI systems, and automation workflows.",
+
+  education: "B.Tech in Computer Science & Engineering",
+
+  university: "Kalinga Institute of Industrial Technology (KIIT), Bhubaneswar",
+
+  graduation: "2026",
+
+  location: "Uttar Pradesh, India",
+
+  availability: "Open to opportunities",
+
+  relocation: "Open to relocation across India",
+
+  email: "sp.shivamprasad@gmail.com",
+
   github: "https://github.com/Shivam-8200",
-  linkedin: "https://linkedin.com/in/your-linkedin", // TODO: replace
-  leetcode: "https://leetcode.com/your-handle", // TODO: replace
-  resumeUrl: "/files/resume.pdf",
+
+  linkedin: "https://www.linkedin.com/in/shivam-prasad-8a3920269/",
+
+  leetcode: "",
+
+  resumeUrl: "https://drive.google.com/file/d/1hh4Vm_I51H51dXb4sad7Jn5Smvw-6a7l/view?usp=drive_link",
+
   bio: [
-    "I'm a 2026 CSE graduate who builds full-stack products end to end — from schema design to shipped UI — using the MERN stack, and increasingly, AI-driven automation.",
-    "During my internship at Tata Steel, I was handed no fixed project — so I designed and built a complaint management system from scratch, end to end.",
-    "Outside of client work, I build tools that solve my own problems: an n8n pipeline that automates my job search, and an AI career coach that gives structured feedback on interview prep.",
+    "Computer Science graduate focused on full-stack development, AI-driven systems, and workflow automation.",
+    "Built production-oriented projects across Next.js, React, Node.js, Gemini, Prisma, Inngest, n8n, Docker, and API-driven workflows.",
+    "Currently focused on building reliable software systems, improving problem-solving skills, and turning repetitive workflows into useful automation.",
   ],
-};
+} as const;
+
+
+// ─────────────────────────────────────────────────────────────
+// SKILLS
+// ─────────────────────────────────────────────────────────────
 
 export const SKILLS = {
-  "Languages": ["JavaScript", "TypeScript", "Java", "HTML/CSS"],
-  "Frontend": ["React", "Next.js", "Tailwind CSS", "Redux"],
-  "Backend": ["Node.js", "Express", "REST APIs", "Prisma"],
-  "Database": ["MongoDB", "PostgreSQL"],
-  "AI / Automation": ["n8n", "Gemini API", "LangChain (basics)", "Agentic pipelines", "Inngest"],
-  "Tools": ["Git", "GitHub", "Postman", "Vercel", "Docker (basics)"],
-};
+  "Programming Languages": [
+    "C",
+    "C++",
+    "Python",
+    "Java",
+    "JavaScript",
+  ],
+
+  "Web Development": [
+    "HTML",
+    "CSS",
+    "React",
+    "Next.js",
+    "Express.js",
+    "REST APIs",
+  ],
+
+  "AI & Automation": [
+    "n8n",
+    "Gemini API",
+    "LLM Integration",
+    "Agentic AI Pipelines",
+    "Inngest",
+    "Workflow Orchestration",
+  ],
+
+  "DevOps & Infrastructure": [
+    "Docker",
+    "Serverless Architecture",
+    "Cloud Deployment",
+  ],
+
+  Databases: [
+    "MongoDB",
+    "MySQL",
+    "Prisma",
+  ],
+
+  Tools: [
+    "Git",
+    "GitHub",
+    "Postman",
+    "Google Sheets API",
+    "Telegram Bot API",
+  ],
+
+  "Computer Science": [
+    "Data Structures",
+    "Operating Systems",
+    "DBMS",
+    "Computer Networks",
+    "OOP",
+  ],
+} as const;
+
+
+// ─────────────────────────────────────────────────────────────
+// PROJECTS
+// ─────────────────────────────────────────────────────────────
 
 export type Project = {
   id: string;
   name: string;
   tagline: string;
   description: string;
+
   stack: string[];
+
   github?: string;
   live?: string;
+
   highlight?: string;
-  why: string;
-  what: string;
-  how: string;
+
+  problem: string;
+  solution: string;
+
+  features: string[];
+
+  architecture?: {
+    summary: string;
+    flow: string[];
+  };
+
+  engineeringDecisions?: string[];
+
+  impact?: string[];
+
+  screenshots?: string[];
 };
+
 
 export const PROJECTS: Project[] = [
   {
-    id: "job-hunter-pipeline",
-    name: "Job Hunter Pipeline",
-    tagline: "22-node n8n automation that finds and tracks jobs for me, daily",
+    id: "job-hunter",
+
+    name: "Job Hunter",
+
+    tagline: "Autonomous AI Job Hunting Pipeline",
+
     description:
-      "An end-to-end automation built in n8n that scrapes and filters new job postings, uses the Gemini API to score relevance against my profile, deduplicates against a running Google Sheet, and sends me a Telegram alert for anything worth applying to — cutting my manual job-search time dramatically.",
-    stack: ["n8n", "Gemini API", "Google Sheets API", "Telegram Bot API"],
-    github: "https://github.com/Shivam-8200",
-    highlight: "22 automated nodes · daily runs · zero manual triage",
-    why: "Manually browsing five job boards a day and cross-checking which ones I'd already applied to was eating hours I needed for DSA practice and actual applications. I wanted the search to run itself.",
-    what: "A 22-node n8n workflow that continuously pulls new postings, scores each one against my profile using the Gemini API, checks a running Google Sheet to skip anything already seen, and pushes a Telegram alert only for postings worth my time.",
-    how: "Built the trigger and scraping nodes first, then added a Gemini API node that reads the job description and returns a relevance score with reasoning. Deduplication happens against a Google Sheet acting as a lightweight database. The whole pipeline runs on a schedule with no manual step in between.",
+      "A self-hosted automation workflow that orchestrates job discovery, AI-powered profile matching, persistent deduplication, and Telegram notifications.",
+
+    stack: [
+      "n8n",
+      "Docker",
+      "Gemini API",
+      "Google Sheets API",
+      "Telegram Bot API",
+    ],
+
+    github: "https://github.com/Shivam-8200/ai-job-hunter-urf-job-shikari.git",
+
+    highlight:
+      "22-node automation pipeline with AI-driven job matching and persistent deduplication.",
+
+    problem:
+      "Manually searching across multiple job sources and repeatedly reviewing similar listings creates repetitive work and makes it harder to focus on applications and preparation.",
+
+    solution:
+      "Built an automated workflow that discovers job opportunities, evaluates relevance using Gemini, prevents duplicate processing with Google Sheets, and sends relevant matches through Telegram.",
+
+    features: [
+      "Scheduled job discovery workflow",
+      "AI-powered job-profile matching",
+      "Persistent deduplication using Google Sheets",
+      "Real-time Telegram notifications",
+      "Self-hosted n8n workflow",
+      "Multi-service orchestration",
+    ],
+
+    architecture: {
+      summary:
+        "Scheduled automation orchestrates job discovery, filtering, AI matching, deduplication, and notifications.",
+
+      flow: [
+        "Scheduled trigger",
+        "Job source collection",
+        "Job filtering / processing",
+        "Gemini-powered relevance matching",
+        "Google Sheets deduplication",
+        "Telegram notification",
+      ],
+    },
+
+    engineeringDecisions: [
+      "Used self-hosted n8n to make the workflow independently controllable.",
+      "Used Google Sheets as a lightweight persistent deduplication store.",
+      "Used Telegram for immediate notification delivery.",
+    ],
+
+    impact: [
+      "Built a 22-node automation pipeline.",
+      "Reduced manual job-search effort by approximately 80%.",
+    ],
+
+    screenshots: [],
   },
+
   {
     id: "ai-career-coach",
+
     name: "AI Career Coach",
-    tagline: "A structured, AI-driven interview and career prep tool",
+
+    tagline: "Full-Stack AI Career & Interview Platform",
+
     description:
-      "A full-stack app that generates personalized interview questions, reviews answers, and tracks prep progress over time, backed by a Postgres schema via Prisma and background jobs via Inngest for scheduled feedback loops.",
-    stack: ["Next.js", "Prisma", "Inngest", "Gemini API", "PostgreSQL"],
-    github: "https://github.com/Shivam-8200",
-    highlight: "Full-stack · background jobs · real prep data",
-    why: "Generic interview-prep resources aren't tailored to a specific candidate's background. I wanted something that actually knew my projects and skill gaps and coached me against them.",
-    what: "A full-stack app that generates interview questions personalized to a user's profile, evaluates their answers, and tracks prep progress over time — closer to a coach than a static question bank.",
-    how: "Next.js on the frontend and API layer, Prisma over PostgreSQL for structured prep-session data, and Inngest running background jobs for scheduled feedback and reminders. The Gemini API handles question generation and answer evaluation.",
+      "A full-stack AI platform that provides personalized career guidance, interview preparation, resume-oriented insights, and AI-powered workflows.",
+
+    stack: [
+      "Next.js",
+      "Prisma",
+      "Inngest",
+      "Gemini API",
+      "Serverless",
+    ],
+
+    github: "https://github.com/Shivam-8200/ai-career-coach.git",
+    live: "https://ai-career-coach-nu-liard.vercel.app/",
+
+    highlight:
+      "Full-stack AI platform with asynchronous workflow orchestration and persistent user data.",
+
+    problem:
+      "Generic career and interview resources do not adapt well to an individual candidate's skills, background, and progress.",
+
+    solution:
+      "Built a personalized AI career platform that combines user data, AI-generated guidance, and asynchronous workflows into one full-stack application.",
+
+    features: [
+      "Personalized AI career recommendations",
+      "AI-powered interview preparation",
+      "Persistent user data",
+      "Asynchronous workflow orchestration",
+      "Gemini-based inference",
+      "Serverless application architecture",
+    ],
+
+    architecture: {
+      summary:
+        "The application combines a Next.js application layer with Gemini inference, Prisma data access, and Inngest-based asynchronous workflows.",
+
+      flow: [
+        "User interaction",
+        "Next.js application layer",
+        "Gemini AI inference",
+        "Prisma data layer",
+        "Inngest asynchronous workflows",
+        "Personalized result",
+      ],
+    },
+
+    engineeringDecisions: [
+      "Used Prisma for structured database access.",
+      "Used Inngest for asynchronous workflow orchestration.",
+      "Separated AI inference from persistent application data.",
+    ],
+
+    impact: [
+      "Improved workflow reliability through asynchronous orchestration.",
+      "Reduced execution failures by 60% according to the current resume.",
+    ],
+
+    screenshots: [],
   },
-  {
-    id: "complaint-management-system",
-    name: "Complaint Management System",
-    tagline: "Built independently during my Tata Steel internship",
-    description:
-      "Given no fixed brief during my internship, I identified a real internal need and built a complaint management system end to end — covering ticket intake, status tracking, and resolution workflows — using the MERN stack.",
-    stack: ["React", "Node.js", "Express", "MongoDB"],
-    highlight: "Self-initiated · shipped during internship",
-    why: "I wasn't handed a pre-scoped project at Tata Steel — I had to find a real gap myself. Complaint tracking was being done informally, with no structured way to log status or ownership.",
-    what: "A MERN-stack system covering ticket intake, status tracking, and resolution workflows — letting complaints be logged, assigned, and tracked to closure instead of living in email threads.",
-    how: "Designed the MongoDB schema first around ticket state transitions, built the Express/Node API around it, then the React frontend for intake and tracking views. Owned every layer — requirements, schema, backend, frontend, and deployment — solo.",
-  },
+
+  
 ];
+
+
+// ─────────────────────────────────────────────────────────────
+// EXPERIENCE
+// ─────────────────────────────────────────────────────────────
 
 export type ExperienceItem = {
   company: string;
@@ -92,38 +295,102 @@ export type ExperienceItem = {
   points: string[];
 };
 
+
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    company: "Tata Steel",
+    company: "TATA STEEL Pvt. Ltd.",
+
     role: "Web Development Intern",
+
     period: "May 2025 — July 2025",
-    location: "Remote / Onsite",
+
+    location: "India",
+
     points: [
-      "Independently conceived, designed, and built a complaint management system using the MERN stack after receiving no pre-assigned project.",
-      "Owned the project end to end — requirements, schema design, frontend, backend, and deployment.",
+      "Developed a complaint management web application with user registration and ticket tracking functionality using HTML, CSS, JavaScript, and SQL.",
+      "Built and enhanced frontend UI components to improve form flow and user interaction experience.",
+      "Designed backend logic with SQL for data storage and retrieval supporting the operational use case.",
     ],
   },
 ];
 
+
+// ─────────────────────────────────────────────────────────────
+// EDUCATION
+// ─────────────────────────────────────────────────────────────
+
 export const EDUCATION = {
-  institution: "KIIT University, Bhubaneswar",
-  degree: "B.Tech, Computer Science & Engineering",
+  institution: "Kalinga Institute of Industrial Technology",
+
+  shortInstitution: "KIIT University",
+
+  location: "Bhubaneswar",
+
+  degree: "B.Tech in Computer Science and Engineering",
+
   period: "2022 — 2026",
-};
+} as const;
+
+
+// ─────────────────────────────────────────────────────────────
+// CERTIFICATIONS
+// ─────────────────────────────────────────────────────────────
+
+export const CERTIFICATIONS = [
+  {
+    name: "AWS Cloud Virtual Internship",
+    issuer: "AICTE",
+  },
+
+  {
+    name: "Blockchain Developer Certification",
+    issuer: "Timechain Labs",
+  },
+] as const;
+
+
+// ─────────────────────────────────────────────────────────────
+// SYSTEM / TERMINAL DATA
+// ─────────────────────────────────────────────────────────────
 
 export const SYSTEM_STATS = [
-  { label: "Applications sent", value: "~1/day", note: "tracked across Superset + direct portals" },
-  { label: "DSA practice", value: "Daily", note: "Java · Arrays, Strings, Sliding Window, Stack/Queue" },
-  { label: "Target stack", value: "MERN + AI", note: "React · Next.js · Node · Express · MongoDB" },
-  { label: "Relocation ready", value: "4 cities", note: "Bengaluru · Hyderabad · Noida · Gurgaon" },
-];
+  {
+    label: "Primary Focus",
+    value: "Full Stack + AI",
+    note: "Web applications, AI systems and workflow automation",
+  },
+
+  {
+    label: "Current Education",
+    value: "B.Tech CSE",
+    note: "KIIT University · 2022–2026",
+  },
+
+  {
+    label: "Featured Projects",
+    value: "2",
+    note: "Automation · AI ",
+  },
+
+  {
+    label: "Availability",
+    value: "Open",
+    note: "Open to opportunities",
+  },
+] as const;
+
 
 export const TERMINAL_HELP = `Available commands:
-  about       - who I am
-  skills      - technical skills
-  projects    - what I've built
-  experience  - work history
-  contact     - how to reach me
-  resume      - download my resume
-  clear       - clear the terminal
-  help        - show this message`;
+
+  whoami       - profile summary
+  about        - about Shivam
+  skills       - technical skills
+  projects     - featured projects
+  experience   - work experience
+  education    - education
+  certifications - certifications
+  resume       - open resume
+  github       - open GitHub
+  contact      - contact information
+  clear        - clear the terminal
+  help         - show this message`;

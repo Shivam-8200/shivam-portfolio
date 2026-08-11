@@ -18,7 +18,7 @@ type DockProps = {
   onLaunch: (id: string) => void;
 };
 
-const BASE = 48;
+const BASE = 40;
 const MAX_SCALE = 1.55;
 const SPREAD = 1;
 
@@ -36,7 +36,7 @@ export default function Dock({ apps, onLaunch }: DockProps) {
   return (
     <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-[200]">
       <div
-        className="glass-dock flex items-end gap-2.5 px-3 py-2 rounded-[22px]"
+        className="glass-dock flex items-end gap-1.5 sm:gap-2.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-[20px] sm:rounded-[22px]"
         style={{ border: "1px solid var(--border)" }}
         onMouseLeave={() => setHovered(null)}
       >
@@ -72,11 +72,11 @@ export default function Dock({ apps, onLaunch }: DockProps) {
                 onClick={() => onLaunch(app.id)}
                 animate={{ scale, y: scale > 1 ? -(scale - 1) * 20 : 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                style={{ width: BASE, height: BASE, originY: 1 }}
-                className="rounded-[13px] flex items-center justify-center relative"
+                style={{ originY: 1 }}
+className="w-10 h-10 sm:w-12 sm:h-12 rounded-[11px] sm:rounded-[13px] flex items-center justify-center relative"
               >
                 <div
-                  className="w-full h-full rounded-[13px] flex items-center justify-center"
+                  className="w-full h-full rounded-[11px] sm:rounded-[13px] flex items-center justify-center"
                   style={{
                     background: app.bg || "var(--surface-raised)",
                     boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 3px 10px -3px rgba(0,0,0,0.5)",
