@@ -142,7 +142,8 @@ PROFILE
 Name: ${PROFILE.name}
 Title: ${PROFILE.fullTitle}
 Tagline: ${PROFILE.tagline}
-Location preference: ${PROFILE.location}
+Location: ${PROFILE.location}
+Relocation: ${PROFILE.relocation}
 
 Bio:
 ${PROFILE.bio.join("\n")}

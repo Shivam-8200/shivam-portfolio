@@ -31,6 +31,8 @@ import ProjectDetailWindow from "./windows/ProjectDetailWindow";
 import FinderWindow from "./windows/FinderWindow";
 import ProjectsWindow from "./windows/ProjectsWindow";
 import PhotosWindow from "./windows/PhotosWindow";
+import EducationWindow from "./windows/EducationWindow";
+import CertificationsWindow from "./windows/CertificationsWindow";
 
 import { PROFILE, PROJECTS } from "@/lib/data";
 
@@ -51,7 +53,14 @@ type AppId =
   | "contact";
 
 
-type WinKind = "app" | "project";
+type WinKind =
+  | "app"
+  | "project"
+  | "about"
+  | "skills"
+  | "experience"
+  | "education"
+  | "certifications";
 
 
 type OpenWindow = {
@@ -309,30 +318,40 @@ function InteractiveName() {
 
         return (
           <span
-            key={`${letter}-${index}`}
-            onMouseEnter={() =>
-              setActiveLetter(index)
-            }
-            className="inline-block"
-            style={{
-              transform: `translateY(${translateY}px) scale(${scale})`,
-              color: isActive
-                ? "var(--accent)"
-                : "var(--text)",
-              textShadow: isActive
-                ? "0 0 24px rgba(125, 211, 252, 0.38)"
-                : "none",
-              transition:
-                "transform 180ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms ease, text-shadow 180ms ease",
-              willChange: "transform",
-              whiteSpace:
-                letter === " "
-                  ? "pre"
-                  : undefined,
-            }}
-          >
-            {letter}
-          </span>
+  key={`${letter}-${index}`}
+  onMouseEnter={() => setActiveLetter(index)}
+  className="inline-block"
+  style={{
+    transform: `translateY(${translateY}px) scale(${scale})`,
+    color: isActive
+      ? "var(--accent)"
+      : "var(--text)",
+
+    textShadow: isActive
+      ? `
+          0 0 10px rgba(125, 211, 252, 0.9),
+          0 0 24px rgba(125, 211, 252, 0.6),
+          0 0 45px rgba(167, 139, 250, 0.4)
+        `
+      : `
+          0 0 8px rgba(125, 211, 252, 0.65),
+          0 0 20px rgba(125, 211, 252, 0.45),
+          0 0 45px rgba(167, 139, 250, 0.3)
+        `,
+
+    transition:
+      "transform 180ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms ease, text-shadow 180ms ease",
+
+    willChange: "transform",
+
+    whiteSpace:
+      letter === " "
+        ? "pre"
+        : undefined,
+  }}
+>
+  {letter}
+</span>
         );
       })}
     </span>
@@ -366,19 +385,22 @@ export default function Desktop() {
      ======================================================= */
 
   const launch = useCallback(
-    (kind: WinKind, id: string) => {
-      setStartOpen(false);
+  (kind: WinKind, id: string) => {
+    setStartOpen(false);
 
-      const key = `${kind}:${id}`;
+    const key = `${kind}:${id}`;
 
-      setOpenWindows((prev) => {
-        const existing = prev.find(
-          (window) => window.key === key
-        );
+    setOpenWindows((prev) => {
+      const existing = prev.find(
+        (window) => window.key === key
+      );
 
-        zCounter += 1;
+      // Already open
+      if (existing) {
+        // Minimized → restore
+        if (existing.minimized) {
+          zCounter += 1;
 
-        if (existing) {
           return prev.map((window) =>
             window.key === key
               ? {
@@ -390,25 +412,37 @@ export default function Desktop() {
           );
         }
 
-        const offset = Math.min(prev.length * 24, 120);
+        // Already visible → close
+        return prev.filter(
+          (window) => window.key !== key
+        );
+      }
 
-        return [
-          ...prev,
-          {
-            key,
-            kind,
-            id,
-            z: zCounter,
-            x: 80 + offset,
-            y: 70 + offset,
-            minimized: false,
-            maximized: false,
-          },
-        ];
-      });
-    },
-    []
-  );
+      // Not open → open
+      zCounter += 1;
+
+      const offset = Math.min(
+        prev.length * 24,
+        120
+      );
+
+      return [
+        ...prev,
+        {
+          key,
+          kind,
+          id,
+          z: zCounter,
+          x: 80 + offset,
+          y: 70 + offset,
+          minimized: false,
+          maximized: false,
+        },
+      ];
+    });
+  },
+  []
+);
 
 
   /* =======================================================
@@ -581,8 +615,7 @@ export default function Desktop() {
   return DOCK_APPS.map((app) => {
     const isOpen = openWindows.some(
       (window) =>
-        window.key === `app:${app.id}` &&
-        !window.minimized
+        window.key === `app:${app.id}`
     );
 
     const hasProjectWindow =
@@ -740,7 +773,7 @@ export default function Desktop() {
 
           <div
             className="
-              mono
+              mono glow-label
               text-[10px]
               md:text-xs
               tracking-[0.28em]
@@ -757,11 +790,11 @@ export default function Desktop() {
 
           <h1
   className="
-    display
+    graffiti-hero
+    !font-normal
     text-5xl
     md:text-7xl
     lg:text-8xl
-    font-semibold
     tracking-tight
     pointer-events-auto
     cursor-default
@@ -775,23 +808,22 @@ export default function Desktop() {
 
 
           <p
-            className="
-              mt-4
-              text-base
-              md:text-lg
-              max-w-xl
-              mx-auto
-            "
-            style={{
-              color: "var(--text-muted)",
-            }}
-          >
-            Full-Stack Developer · AI · Automation
-          </p>
+  className="
+    graffiti-subtitle
+    mt-4
+    text-base
+    md:text-lg
+    max-w-xl
+    mx-auto
+  "
+>
+  Full-Stack Developer · AI · Automation
+</p>
 
 
           <div
             className="
+              glow-label
               mt-5
               flex
               items-center
@@ -800,18 +832,18 @@ export default function Desktop() {
               text-xs
             "
             style={{
-              color: "var(--text-faint)",
+              color: "var(--text-muted)",
             }}
           >
 
             <span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{
-                background: "#4ade80",
-                boxShadow:
-                  "0 0 12px rgba(74,222,128,0.65)",
-              }}
-            />
+  className="status-dot w-1.5 h-1.5 rounded-full"
+  style={{
+    background: "#4ade80",
+    boxShadow:
+      "0 0 12px rgba(74,222,128,0.65)",
+  }}
+/>
 
             <span>
               Open to opportunities
@@ -881,40 +913,52 @@ export default function Desktop() {
             let content: React.ReactNode = null;
 
 
-            if (window.kind === "app") {
-
+            if (window.kind === "education") {
+  content = <EducationWindow />;
+} else if (window.kind === "certifications") {
+  content = <CertificationsWindow />;
+} else if (window.kind === "app") {
   if (window.id === "finder") {
-  content = (
-    <FinderWindow
-      onOpen={finderOpen}
-    />
-  );
-} else if (window.id === "projects") {
-  content = (
-    <ProjectsWindow
-      onOpenProject={openProject}
-    />
-  );
-} else if (window.id === "photos") {
-  content = <PhotosWindow />;
-} else {
-  const Comp =
-    APP_COMPONENTS[
-      window.id as Exclude<AppId, "finder" | "projects" | "photos">
-    ];
+    content = (
+      <FinderWindow
+        onOpen={finderOpen}
+        onOpenEducation={() =>
+          launch("education", "education")
+        }
+        onOpenCertifications={() =>
+          launch(
+            "certifications",
+            "certifications"
+          )
+        }
+      />
+    );
+  } else if (window.id === "projects") {
+    content = (
+      <ProjectsWindow
+        onOpenProject={openProject}
+      />
+    );
+  } else if (window.id === "photos") {
+    content = <PhotosWindow />;
+  } else {
+    const Comp =
+      APP_COMPONENTS[
+        window.id as Exclude<
+          AppId,
+          "finder" | "projects" | "photos"
+        >
+      ];
 
-  content = <Comp />;
-}
-
+    content = <Comp />;
+  }
 } else if (project) {
-              content = (
-                <ProjectDetailWindow
-                  project={project}
-                />
-              );
-
-            }
-
+  content = (
+    <ProjectDetailWindow
+      project={project}
+    />
+  );
+}
 
             return (
               <Window

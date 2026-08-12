@@ -141,10 +141,11 @@ function formatAssistantText(text: string) {
 
 function formatInlineText(text: string) {
   const parts = text.split(
-    /(\*\*[^*]+\*\*|`[^`]+`)/
+    /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/
   );
 
   return parts.map((part, index) => {
+    // Bold: **text**
     if (
       part.startsWith("**") &&
       part.endsWith("**")
@@ -162,6 +163,25 @@ function formatInlineText(text: string) {
       );
     }
 
+    // Italic: *text*
+    if (
+      part.startsWith("*") &&
+      part.endsWith("*") &&
+      !part.startsWith("**")
+    ) {
+      return (
+        <span
+          key={index}
+          style={{
+            color: "var(--text)",
+          }}
+        >
+          {part.slice(1, -1)}
+        </span>
+      );
+    }
+
+    // Code: `text`
     if (
       part.startsWith("`") &&
       part.endsWith("`")

@@ -19,10 +19,18 @@ type FinderItem = {
 };
 
 type FinderWindowProps = {
-  onOpen: (id: "about" | "skills" | "experience") => void;
+  onOpen: (
+    id: "about" | "skills" | "experience"
+  ) => void;
+  onOpenEducation: () => void;
+  onOpenCertifications: () => void;
 };
 
-export default function FinderWindow({ onOpen }: FinderWindowProps) {
+export default function FinderWindow({
+  onOpen,
+  onOpenEducation,
+  onOpenCertifications,
+}: FinderWindowProps) {
   const items: FinderItem[] = [
     {
       id: "about",
@@ -46,26 +54,32 @@ export default function FinderWindow({ onOpen }: FinderWindowProps) {
       action: () => onOpen("experience"),
     },
     {
-      id: "education",
-      name: "Education",
-      description: "B.Tech Computer Science & Engineering",
-      icon: <GraduationCap size={22} />,
-      action: () => {},
-    },
+  id: "education",
+  name: "Education",
+  description: "B.Tech Computer Science & Engineering",
+  icon: <GraduationCap size={22} />,
+  action: onOpenEducation,
+},
     {
-      id: "certifications",
-      name: "Certifications",
-      description: "Courses and professional certifications",
-      icon: <Award size={22} />,
-      action: () => {},
-    },
+  id: "certifications",
+  name: "Certifications",
+  description: "Courses and professional certifications",
+  icon: <Award size={22} />,
+  action: onOpenCertifications,
+},
     {
-      id: "resume",
-      name: "Resume.pdf",
-      description: "View the complete resume",
-      icon: <FileText size={22} />,
-      action: () => {},
-    },
+  id: "resume",
+  name: "Resume.pdf",
+  description: "View the complete resume",
+  icon: <FileText size={22} />,
+  action: () => {
+    window.open(
+      "/files/Resume4me.pdf",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  },
+},
   ];
 
   return (
@@ -73,11 +87,11 @@ export default function FinderWindow({ onOpen }: FinderWindowProps) {
       {/* Header */}
       <div className="mb-5">
         <div
-          className="display text-lg font-semibold"
-          style={{ color: "var(--text)" }}
-        >
-          Home
-        </div>
+  className="graffiti text-xl"
+  style={{ color: "var(--text)" }}
+>
+  Home
+</div>
 
         <p
           className="text-xs mt-1"
@@ -120,11 +134,11 @@ export default function FinderWindow({ onOpen }: FinderWindowProps) {
             </div>
 
             <div
-              className="text-sm font-semibold"
-              style={{ color: "var(--text)" }}
-            >
-              {item.name}
-            </div>
+  className="graffiti text-base"
+  style={{ color: "var(--text)" }}
+>
+  {item.name}
+</div>
 
             <div
               className="text-[11px] leading-relaxed mt-1"

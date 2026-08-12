@@ -1,5 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Permanent+Marker&family=Sora:wght@500;600;700&display=swap");
 @import "tailwindcss";
-
 :root {
   /* =========================================================
      SHIVAM.DEV — MIDNIGHT AURORA DESIGN SYSTEM
@@ -30,8 +30,8 @@
   --text-faint: #59657a;
 
   /* Typography */
-  --app-font-display: "Space Grotesk", var(--app-font-sans);
-  --app-font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --app-font-display: "Sora", var(--app-font-sans);
+  --app-font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --app-font-mono: "JetBrains Mono", ui-monospace, monospace;
   --app-font-marker: "Permanent Marker", cursive;
   --app-font-script: "Caveat", cursive;
@@ -430,5 +430,63 @@ body {
 
   .glass-window p {
     line-height: 1.7;
+  }
+}
+
+/* =========================================================
+   GRAFFITI / STREET-STYLE HEADINGS
+   ========================================================= */
+
+.graffiti {
+  font-family: var(--app-font-marker);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+
+
+/* Hero graffiti styling */
+.graffiti-hero {
+  font-family: var(--app-font-marker);
+  font-weight: 400;
+  text-shadow:
+    0 0 8px rgba(125, 211, 252, 0.65),
+    0 0 20px rgba(125, 211, 252, 0.45),
+    0 0 45px rgba(167, 139, 250, 0.3);
+}
+
+.graffiti-subtitle {
+  font-family: var(--app-font-marker);
+  font-weight: 400;
+  text-shadow:
+    0 0 6px rgba(125, 211, 252, 0.75),
+    0 0 16px rgba(125, 211, 252, 0.45),
+    0 0 30px rgba(167, 139, 250, 0.25);
+}
+
+/* Glow-only hero labels */
+.glow-label {
+  text-shadow:
+    0 0 6px rgba(125, 211, 252, 0.65),
+    0 0 16px rgba(125, 211, 252, 0.4),
+    0 0 30px rgba(167, 139, 250, 0.22);
+}
+
+.status-dot {
+  animation: statusPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.65);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: scale(0.75);
+    box-shadow: 0 0 4px rgba(74, 222, 128, 0.25);
   }
 }

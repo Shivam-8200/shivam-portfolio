@@ -13,6 +13,9 @@ const BOOT_LOG = [
   "$ npm run build:career",
   "compiling projects... done",
   "compiling experience... done",
+  "[ OK ] portfolio services initialized",
+  "[ OK ] AI assistant online",
+  "[ OK ] workspace ready",
   "$ systemctl start devos",
   `devos ready — welcome, it's ${PROFILE.name}'s machine.`,
 ];
@@ -53,7 +56,11 @@ export default function BootScreen({ onDone }: { onDone: () => void }) {
           <div
             key={i}
             style={{
-              color: line.startsWith("$") ? "var(--accent)" : "var(--text-muted)",
+              color: line.startsWith("$")
+  ? "var(--accent)"
+  : line.startsWith("[ OK ]")
+    ? "var(--accent)"
+    : "var(--text-muted)",
             }}
           >
             {line}
